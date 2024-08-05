@@ -78,7 +78,7 @@ const Dashboard = ({ contractAddress }) => {
 
     return (
         <div className={styles.container}>
-            <h1 className={styles.header}>Dashboard for {contractData.name} ({contractData.symbol})</h1>
+            <h1 className={styles.header}>Dashboard for {contractData.name}</h1>
 
             <h2 className={styles.title}>Transaction History</h2>
             <div className={`${styles.tableContainer} ${styles.scrollable}`}>
