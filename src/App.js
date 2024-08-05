@@ -14,8 +14,8 @@ const App = () => {
     ];
 
     return (
-        <div>
-            <h1>NFT Dashboard</h1>
+        <div style={{ padding:'50px', boxSizing:'border-box' }}>
+            <h1>BLINT DASHBOARD</h1>
             <ContractDropdown
                 contracts={contracts}
                 selectedContract={selectedContract}
