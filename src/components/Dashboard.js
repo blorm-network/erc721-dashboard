@@ -37,6 +37,7 @@ const Dashboard = ({ contractAddress }) => {
                 const to = event.args.to;
                 const tokenId = event.args.tokenId.toString();
                 const date = new Date(blocks[index].timestamp * 1000).toLocaleDateString();
+                const transactionHash = log.transactionHash;
 
                 if (to !== ethers.constants.AddressZero) {
                     if (holdersMap.has(to)) {
@@ -59,6 +60,7 @@ const Dashboard = ({ contractAddress }) => {
                     to,
                     tokenId,
                     date,
+                    transactionHash,
                 };
             });
 
@@ -87,6 +89,7 @@ const Dashboard = ({ contractAddress }) => {
                             <th>To</th>
                             <th>Token ID</th>
                             <th>Date</th>
+                            <th>Transaction Hash</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -96,6 +99,7 @@ const Dashboard = ({ contractAddress }) => {
                                 <td>{tx.to}</td>
                                 <td>{tx.tokenId}</td>
                                 <td>{tx.date}</td>
+                                <td><a href={`https://polygonscan.com/tx/${tx.transactionHash}`} target="_blank" rel="noopener noreferrer">{tx.transactionHash}</a></td>
                             </tr>
                         ))}
                     </tbody>
