@@ -10,6 +10,17 @@ const Dashboard = ({ contractAddress }) => {
     const [uniqueHolders, setUniqueHolders] = useState([]);
 
     useEffect(() => {
+        const switchToPolygonNetwork = async () => {
+            try {
+                await window.ethereum.request({
+                    method: 'wallet_switchEthereumChain',
+                    params: [{ chainId: '0x89' }], // Chain ID for Polygon Mainnet
+                });
+            } catch (error) {
+                console.error('Failed to switch to the Polygon network', error);
+            }
+        };
+
         const fetchContractData = async () => {
             const provider = new ethers.providers.Web3Provider(window.ethereum);
             const contract = new ethers.Contract(contractAddress, ABI.abi, provider);
@@ -72,7 +83,7 @@ const Dashboard = ({ contractAddress }) => {
         };
 
         if (contractAddress) {
-            fetchContractData();
+            switchToPolygonNetwork().then(fetchContractData);
         }
     }, [contractAddress]);
 

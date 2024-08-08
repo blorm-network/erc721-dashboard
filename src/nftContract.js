@@ -9,22 +9,42 @@ const web3 = new Web3(Web3.givenProvider || 'http://localhost:8545');
 const contract = new web3.eth.Contract(ABI.abi, CONTRACT_ADDRESS);
 
 export const getMintedTokens = async () => {
-  return await contract.methods.totalSupply().call();
+  try {
+    return await contract.methods.totalSupply().call();
+  } catch (error) {
+    console.error("Error in getMintedTokens:", error);
+    throw error;
+  }
 };
 
 export const getMintFee = async () => {
-  return await contract.methods.fee().call();
+  try {
+    return await contract.methods.fee().call();
+  } catch (error) {
+    console.error("Error in getMintFee:", error);
+    throw error;
+  }
 };
 
 export const getTokenDetails = async (tokenId) => {
-  return await contract.methods.tokenURI(tokenId).call();
+  try {
+    return await contract.methods.tokenURI(tokenId).call();
+  } catch (error) {
+    console.error("Error in getTokenDetails:", error);
+    throw error;
+  }
 };
 
 export const getTransactionHistory = async (account) => {
-  const events = await contract.getPastEvents('Transfer', {
-    filter: { from: account },
-    fromBlock: 0,
-    toBlock: 'latest',
-  });
-  return events;
+  try {
+    const events = await contract.getPastEvents('Transfer', {
+      filter: { from: account },
+      fromBlock: 0,
+      toBlock: 'latest',
+    });
+    return events;
+  } catch (error) {
+    console.error("Error in getTransactionHistory:", error);
+    throw error;
+  }
 };
